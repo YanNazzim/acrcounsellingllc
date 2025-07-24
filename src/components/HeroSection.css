@@ -1,0 +1,69 @@
+.hero-section {
+  background-color: #e0f2f7; /* Soft blue background */
+  padding: 100px 40px; /* More vertical padding */
+  text-align: center;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh; /* Make it take up more vertical space */
+}
+
+.hero-section .hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero-section h2 {
+  font-size: 3.8em; /* Larger heading */
+  margin-bottom: 25px;
+  color: #2c3e50;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.hero-section p {
+  font-size: 1.3em; /* Larger paragraph text */
+  line-height: 1.7;
+  margin-bottom: 40px;
+  color: #555;
+}
+
+.hero-section button {
+  background-color: #007bff;
+  color: white;
+  padding: 18px 35px; /* Larger button */
+  border: none;
+  border-radius: 8px; /* Slightly more rounded corners */
+  font-size: 1.2em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.hero-section button:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px); /* Subtle lift on hover */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments for Hero Section */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 60px 20px;
+    min-height: unset; /* Remove min-height on smaller screens */
+  }
+
+  .hero-section h2 {
+    font-size: 2.5em;
+  }
+
+  .hero-section p {
+    font-size: 1em;
+  }
+
+  .hero-section button {
+    padding: 12px 25px;
+    font-size: 1em;
+  }
+}

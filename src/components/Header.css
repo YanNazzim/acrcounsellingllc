@@ -1,0 +1,79 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px; /* Reduced padding slightly */
+  background-color: #ffffff; /* White background */
+  border-bottom: 1px solid #e0e0e0; /* Lighter border */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08); /* More subtle shadow */
+  position: sticky; /* Make header sticky */
+  top: 0;
+  z-index: 1000; /* Ensure it stays on top */
+}
+
+.header .logo h1 {
+  margin: 0;
+  font-size: 28px; /* Slightly larger logo text */
+  color: #2c3e50; /* Dark blue for logo */
+  font-weight: 700; /* Bolder */
+}
+
+.header nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.header nav ul li {
+  margin-left: 30px; /* Increased space between nav items */
+}
+
+.header nav ul li a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 600; /* Semi-bold */
+  transition: color 0.3s ease, transform 0.2s ease;
+  position: relative; /* For underline effect */
+}
+
+.header nav ul li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: #007bff; /* Underline color */
+  transition: width 0.3s ease-out;
+}
+
+.header nav ul li a:hover {
+  color: #007bff;
+}
+
+.header nav ul li a:hover::after {
+  width: 100%; /* Expand underline on hover */
+}
+
+/* Responsive adjustments for Header */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    padding: 15px 20px;
+  }
+
+  .header .logo {
+    margin-bottom: 15px;
+  }
+
+  .header nav ul {
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+  }
+
+  .header nav ul li {
+    margin: 10px 0;
+  }
+}

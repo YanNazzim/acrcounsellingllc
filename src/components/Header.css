@@ -2,39 +2,62 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 40px; /* Reduced padding slightly */
-  background-color: #ffffff; /* White background */
-  border-bottom: 1px solid #e0e0e0; /* Lighter border */
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08); /* More subtle shadow */
-  position: sticky; /* Make header sticky */
+  padding: 15px 40px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+  position: sticky;
   top: 0;
-  z-index: 1000; /* Ensure it stays on top */
+  z-index: 1000;
 }
 
 .header .logo h1 {
   margin: 0;
-  font-size: 28px; /* Slightly larger logo text */
-  color: #2c3e50; /* Dark blue for logo */
-  font-weight: 700; /* Bolder */
+  font-size: 28px;
+  color: #2c3e50;
+  font-weight: 700;
 }
 
+/* Hamburger menu button */
+.hamburger-menu {
+  display: none; /* Hidden by default */
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001; /* Ensure it's above the nav-menu when open */
+}
+
+.hamburger-menu .bar {
+  width: 100%;
+  height: 3px;
+  background-color: #2c3e50;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Navigation menu */
 .header nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
+  display: flex; /* Always display as flex for larger screens */
 }
 
 .header nav ul li {
-  margin-left: 30px; /* Increased space between nav items */
+  margin-left: 30px;
 }
 
 .header nav ul li a {
   text-decoration: none;
   color: #555;
-  font-weight: 600; /* Semi-bold */
+  font-weight: 600;
   transition: color 0.3s ease, transform 0.2s ease;
-  position: relative; /* For underline effect */
+  position: relative;
 }
 
 .header nav ul li a::after {
@@ -44,7 +67,7 @@
   height: 2px;
   bottom: -5px;
   left: 0;
-  background-color: #007bff; /* Underline color */
+  background-color: #007bff;
   transition: width 0.3s ease-out;
 }
 
@@ -53,27 +76,80 @@
 }
 
 .header nav ul li a:hover::after {
-  width: 100%; /* Expand underline on hover */
+  width: 100%;
 }
 
 /* Responsive adjustments for Header */
 @media (max-width: 768px) {
   .header {
-    flex-direction: column;
+    flex-direction: row; /* Keep logo and hamburger on one row */
     padding: 15px 20px;
   }
 
   .header .logo {
-    margin-bottom: 15px;
+    margin-bottom: 0; /* Remove margin from previous mobile style */
   }
 
-  .header nav ul {
+  .hamburger-menu {
+    display: flex; /* Show hamburger menu on small screens */
+  }
+
+  .nav-menu {
+    display: none; /* Hide the regular nav menu by default on small screens */
     flex-direction: column;
-    text-align: center;
+    position: fixed;
+    top: 0;
+    right: -100%; /* Start off-screen */
+    width: 70%; /* Adjust as needed */
+    max-width: 300px;
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    padding-top: 80px; /* Space for fixed header/logo */
+    transition: right 0.3s ease-in-out;
+  }
+
+  .nav-menu.open {
+    display: flex; /* Show when 'open' class is applied */
+    right: 0; /* Slide in */
+  }
+
+  .nav-menu ul {
+    flex-direction: column;
+    text-align: left; /* Align text within the mobile menu */
     width: 100%;
   }
 
-  .header nav ul li {
-    margin: 10px 0;
+  .nav-menu ul li {
+    margin: 0; /* Remove left margin */
+    padding: 15px 20px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .nav-menu ul li:last-child {
+    border-bottom: none;
+  }
+
+  .nav-menu ul li a {
+    width: 100%;
+    display: block; /* Make links take full width for easier tapping */
+    color: #2c3e50; /* Darker color for mobile links */
+  }
+
+  .nav-menu ul li a::after {
+    display: none; /* Hide underline effect on mobile menu */
+  }
+
+  /* Animations for hamburger icon when open */
+  .hamburger-menu.open .bar:nth-child(1) {
+    transform: translateY(11px) rotate(45deg);
+  }
+
+  .hamburger-menu.open .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger-menu.open .bar:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
   }
 }

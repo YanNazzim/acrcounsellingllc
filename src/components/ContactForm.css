@@ -351,3 +351,73 @@
     margin-right: 10px;
   }
 }
+
+.dob-group {
+  display: flex;
+  justify-content: center; /* Center items horizontally within the flex container */
+  gap: 10px; /* Space between Month, Day, Year fields */
+  margin: 0 auto 5px auto; /* Center the dob-group itself and add bottom margin */
+  /* Re-evaluating max-width for smaller overall fields */
+  max-width: 250px; /* A reasonable max-width for the entire DOB group */
+  min-width: 150px; /* Ensure it doesn't get too small */
+}
+
+.dob-group input[type="text"] {
+  flex: 1; /* Make inputs take equal space within the group */
+  text-align: center; /* Center placeholder text and input value */
+  padding: 10px 8px; /* Slightly reduced padding to make them smaller */
+  /* Remove individual max-width/min-width here as the group max-width controls overall size */
+  max-width: unset; /* Let flex distribute width */
+  min-width: unset; /* Let flex distribute width */
+}
+
+/* Specific adjustments for Month/Day if they need to be slightly narrower than year */
+/* These can often be removed or simplified when flex is handling distribution */
+/* .dob-group input[name="dobMonth"],
+.dob-group input[name="dobDay"] {
+  max-width: 60px;
+} */
+
+
+/* Ensure individual DOB errors are handled or aggregated */
+.form-group .error-message {
+  color: #dc3545;
+  font-size: 0.85em;
+  margin-top: 5px;
+  display: block;
+  text-align: center; /* Center error message */
+}
+
+/* Responsive adjustments for DOB fields */
+@media (max-width: 768px) {
+  .dob-group {
+    flex-wrap: nowrap; /* Keep them on one line if possible */
+    max-width: 200px; /* Adjust max-width for mobile */
+  }
+
+  .dob-group input[type="text"] {
+    width: 30%; /* Approximate width for each to fit 3 in a row */
+    padding: 8px 5px; /* Smaller padding on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .dob-group {
+    gap: 5px; /* Slightly less gap on very small screens */
+    max-width: 180px; /* Further reduce max-width for very small screens */
+  }
+  .dob-group input[type="text"] {
+    width: calc(33.33% - 5px); /* Ensure they roughly fit three per row with smaller gap */
+  }
+}
+
+/* The rest of your ContactForm.css content remains unchanged */
+.contact-form-section {
+  padding: 60px 20px;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  overflow: hidden;
+}

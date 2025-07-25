@@ -4,11 +4,12 @@ import './ContactForm.css';
 
 function ContactForm() {
   const [formData, setFormData] = useState({
-    // Removed firstNameCompleting, lastNameCompleting from initial state
     clientFirstName: '',
     clientLastName: '',
     email: '',
-    dob: '',
+    dobMonth: '', // New state for month
+    dobDay: '',   // New state for day
+    dobYear: '',  // New state for year
     phone: '',
     location: '',
     preferredTime: '',
@@ -19,16 +20,27 @@ function ContactForm() {
     comment: ''
   });
 
-  const [currentStep, setCurrentStep] = useState(1); // Form now starts at what was previously step 2
+  const [currentStep, setCurrentStep] = useState(1);
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    // Optional: Auto-tab/focus for date fields
+    if (name === 'dobMonth' && value.length === 2 && value.match(/^\d+$/)) {
+      document.getElementById('dobDay').focus();
+    }
+    if (name === 'dobDay' && value.length === 2 && value.match(/^\d+$/)) {
+      document.getElementById('dobYear').focus();
+    }
+
+
     setFormData(prevData => ({
       ...prevData,
       [name]: value
     }));
+    // Clear error for the field as user types
     if (errors[name]) {
       setErrors(prevErrors => ({
         ...prevErrors,
@@ -37,20 +49,20 @@ function ContactForm() {
     }
   };
 
-  const totalSteps = 3; // Reduced total steps from 4 to 3
+  const totalSteps = 3;
 
   const validateStep = (step) => {
     let newErrors = {};
     let fieldsToValidate = [];
 
     switch (step) {
-      case 1: // Now includes Potential Client Information fields (was Step 2)
-        fieldsToValidate = ['clientFirstName', 'clientLastName', 'email', 'dob', 'phone'];
+      case 1: // Potential Client Information fields + DOB
+        fieldsToValidate = ['clientFirstName', 'clientLastName', 'email', 'phone', 'dobMonth', 'dobDay', 'dobYear']; // Added DOB fields
         break;
-      case 2: // Now includes Preferences fields (was Step 3)
+      case 2: // Preferences fields
         fieldsToValidate = ['location', 'preferredTime', 'therapyBefore'];
         break;
-      case 3: // Now includes Other Details fields (was Step 4)
+      case 3: // Other Details fields
         fieldsToValidate = ['insurance', 'therapist', 'language'];
         break;
       default:
@@ -67,6 +79,47 @@ function ContactForm() {
     if (step === 1 && formData.email && !/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Email address is invalid';
     }
+
+    // NEW: Date of Birth validation for M/D/Y fields
+    if (step === 1 && !newErrors.dobMonth && !newErrors.dobDay && !newErrors.dobYear) { // Only validate if all parts are filled (and not already flagged as required missing)
+      const { dobMonth, dobDay, dobYear } = formData;
+
+      const month = parseInt(dobMonth, 10);
+      const day = parseInt(dobDay, 10);
+      const year = parseInt(dobYear, 10);
+
+      let dobValid = true;
+
+      if (isNaN(month) || month < 1 || month > 12) {
+        newErrors.dobMonth = 'Invalid Month';
+        dobValid = false;
+      }
+      if (isNaN(day) || day < 1 || day > 31) {
+        newErrors.dobDay = 'Invalid Day';
+        dobValid = false;
+      }
+      // Basic year validation: 4 digits, reasonable range (e.g., 1900-current year)
+      if (isNaN(year) || dobYear.length !== 4 || year < 1900 || year > new Date().getFullYear()) {
+        newErrors.dobYear = 'Invalid Year';
+        dobValid = false;
+      }
+
+      // If parts are numerically valid, check if it's a real date
+      if (dobValid) {
+        const date = new Date(year, month - 1, day);
+        // Check if the date object's values match the input values (handles invalid dates like Feb 30)
+        if (date.getFullYear() !== year || date.getMonth() + 1 !== month || date.getDate() !== day) {
+          if (!newErrors.dobDay) newErrors.dobDay = 'Invalid Date'; // More specific error
+          dobValid = false;
+        }
+      }
+
+      if (!dobValid && !newErrors.dobDay && !newErrors.dobMonth && !newErrors.dobYear) {
+         // Fallback if specific part errors weren't caught but date is still invalid
+         newErrors.dobYear = 'Invalid Date';
+      }
+    }
+
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -85,8 +138,14 @@ function ContactForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateStep(currentStep)) {
-      console.log('Form data submitted:', formData);
+      // Combine DOB parts into a single string for submission if needed
+      const finalFormData = {
+        ...formData,
+        dob: `${formData.dobMonth}/${formData.dobDay}/${formData.dobYear}` // Example combined format
+      };
+      console.log('Form data submitted:', finalFormData);
       setIsSubmitted(true);
+      // Optionally reset form: setFormData(initialState);
     } else {
       console.log('Form has validation errors:', errors);
     }
@@ -106,6 +165,12 @@ function ContactForm() {
     );
   }
 
+  // Determine if dobDay and dobYear fields should be disabled
+  const isMonthFilledAndValid = formData.dobMonth.length > 0 && !errors.dobMonth;
+  const isDayFilledAndValid = formData.dobDay.length > 0 && !errors.dobDay;
+  const isDobComplete = isMonthFilledAndValid && isDayFilledAndValid && formData.dobYear.length === 4 && !errors.dobYear;
+
+
   return (
     <section className="contact-form-section">
       <div className="contact-form-container">
@@ -113,15 +178,12 @@ function ContactForm() {
         <p className="required-note">* Indicates required field</p>
 
         <div className="progress-bar">
-          {/* Progress bar calculation adjusted for 3 steps */}
           <div className="progress" style={{ width: `${((currentStep - 1) / (totalSteps -1)) * 100}%` }}></div>
         </div>
         <div className="step-indicator">Step {currentStep} of {totalSteps}</div>
 
         <form onSubmit={handleSubmit} className="contact-form">
-          {/* Removed Step 1 (Your Information) */}
-
-          {/* New Step 1: Potential Client Information (was Step 2) */}
+          {/* Step 1: Potential Client Information (with new DOB fields) */}
           {currentStep === 1 && (
             <div className="form-step active">
               <fieldset>
@@ -165,19 +227,58 @@ function ContactForm() {
                   />
                   {errors.email && <span className="error-message">{errors.email}</span>}
                 </div>
+
+                {/* Date of Birth: Month, Day, Year fields */}
                 <div className="form-group">
-                  <label htmlFor="dob">Date of Birth *</label>
-                  <input
-                    type="date"
-                    id="dob"
-                    name="dob"
-                    value={formData.dob}
-                    onChange={handleChange}
-                    className={errors.dob ? 'error' : ''}
-                    aria-required="true"
-                  />
-                  {errors.dob && <span className="error-message">{errors.dob}</span>}
+                  <label>Date of Birth *</label>
+                  <div className="dob-group">
+                    <input
+                      type="text"
+                      id="dobMonth"
+                      name="dobMonth"
+                      value={formData.dobMonth}
+                      onChange={handleChange}
+                      placeholder="MM"
+                      maxLength="2"
+                      className={errors.dobMonth ? 'error' : ''}
+                      aria-label="Month"
+                      aria-required="true"
+                    />
+                    <input
+                      type="text"
+                      id="dobDay"
+                      name="dobDay"
+                      value={formData.dobDay}
+                      onChange={handleChange}
+                      placeholder="DD"
+                      maxLength="2"
+                      className={errors.dobDay ? 'error' : ''}
+                      aria-label="Day"
+                      aria-required="true"
+                      disabled={!isMonthFilledAndValid} // Disabled until month is valid
+                    />
+                    <input
+                      type="text"
+                      id="dobYear"
+                      name="dobYear"
+                      value={formData.dobYear}
+                      onChange={handleChange}
+                      placeholder="YYYY"
+                      maxLength="4"
+                      className={errors.dobYear ? 'error' : ''}
+                      aria-label="Year"
+                      aria-required="true"
+                      disabled={!isDayFilledAndValid} // Disabled until day is valid
+                    />
+                  </div>
+                  {/* Display DOB errors from any of the fields */}
+                  {(errors.dobMonth || errors.dobDay || errors.dobYear) &&
+                    <span className="error-message">
+                      {errors.dobMonth || errors.dobDay || errors.dobYear}
+                    </span>
+                  }
                 </div>
+
                 <div className="form-group">
                   <label htmlFor="phone">Phone Number *</label>
                   <input
@@ -195,7 +296,7 @@ function ContactForm() {
             </div>
           )}
 
-          {/* New Step 2: Preferences (was Step 3) */}
+          {/* Step 2: Preferences (was Step 3) */}
           {currentStep === 2 && (
             <div className="form-step active">
               <fieldset>
@@ -363,7 +464,12 @@ function ContactForm() {
               </button>
             )}
             {currentStep < totalSteps && (
-              <button type="button" className="next-button" onClick={nextStep}>
+              <button
+                type="button"
+                className="next-button"
+                onClick={nextStep}
+                disabled={currentStep === 1 && !isDobComplete} // Disable 'Next' on Step 1 if DOB is incomplete/invalid
+              >
                 Next
               </button>
             )}

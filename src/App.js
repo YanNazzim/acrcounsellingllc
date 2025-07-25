@@ -1,10 +1,12 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Import BrowserRouter, Routes, Route
-import './App.css'; // Your existing App.css
-import Header from './components/Header'; // Assuming components are in a 'components' folder
+import React, { useState } from 'react'; // Import useState
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import './App.css';
+import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import ServicesSection from './components/ServicesSection';
 import TeamSection from './components/TeamSection';
+import ContactForm from './components/ContactForm';
+import ContactInfoDisplay from './components/ContactInfoDisplay'; // Import the new component
 
 // --- Create these placeholder components for now ---
 function RatesAndFeesSection() {
@@ -25,13 +27,22 @@ function GettingStartedSection() {
   );
 }
 
+// Modify this section to manage form visibility
 function ContactUsSection() {
+  const [showForm, setShowForm] = useState(false); // State to control form visibility
+
+  const handleStartForm = () => {
+    setShowForm(true);
+  };
+
   return (
-    <section style={{ padding: '60px 40px', textAlign: 'center' }}>
-      <h2>Contact Us</h2>
-      <p>Reach out to us for more information.</p>
-      {/* You'll add a contact form and details here later */}
-    </section>
+    <>
+      {showForm ? (
+        <ContactForm /> // Show the multi-step form
+      ) : (
+        <ContactInfoDisplay onStartForm={handleStartForm} /> // Show initial contact info with button
+      )}
+    </>
   );
 }
 // --- End placeholder components ---
@@ -39,18 +50,17 @@ function ContactUsSection() {
 
 function App() {
   return (
-    <BrowserRouter> {/* Wrap your entire app with BrowserRouter */}
+    <BrowserRouter>
       <div className="App">
-        <Header /> {/* Header will be present on all pages */}
+        <Header />
         <main>
-          <Routes> {/* Define your routes here */}
+          <Routes>
             <Route
               path="/"
               element={
                 <>
                   <HeroSection />
                   <ServicesSection />
-                  {/* You might choose to put ServicesSection on the Home page too, or make it a separate route */}
                 </>
               }
             />
@@ -58,7 +68,6 @@ function App() {
             <Route path="/rates-fees" element={<RatesAndFeesSection />} />
             <Route path="/getting-started" element={<GettingStartedSection />} />
             <Route path="/contact-us" element={<ContactUsSection />} />
-            {/* Add a fallback route for 404 Not Found if desired */}
             <Route path="*" element={<h2 style={{padding: '50px', textAlign: 'center'}}>Page Not Found</h2>} />
           </Routes>
         </main>

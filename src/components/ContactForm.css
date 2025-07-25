@@ -1,0 +1,353 @@
+.contact-form-section {
+  padding: 60px 20px;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh; /* Ensure it takes up sufficient space */
+  overflow: hidden; /* Hide overflow during transitions */
+}
+
+.contact-form-section.submitted {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.contact-form-section.submitted h2 {
+  font-size: 3em;
+  color: #28a745; /* Green for success */
+  margin-bottom: 20px;
+}
+
+.contact-form-section.submitted p {
+  font-size: 1.2em;
+  color: #555;
+}
+
+.contact-form-container {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  width: 100%;
+  box-sizing: border-box; /* Include padding in width */
+  position: relative; /* For step positioning */
+  overflow: hidden; /* Ensure content transitions smoothly */
+}
+
+.contact-form-container h2 {
+  font-size: 2.5em;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.contact-form-container .required-note {
+  text-align: right;
+  font-size: 0.9em;
+  color: #888;
+  margin-bottom: 20px; /* Adjusted margin */
+}
+
+/* Progress Bar */
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.progress-bar .progress {
+  height: 100%;
+  background-color: #007bff;
+  border-radius: 4px;
+  transition: width 0.4s ease-in-out;
+}
+
+.step-indicator {
+  text-align: center;
+  font-size: 0.9em;
+  color: #555;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+/* Form Steps Container */
+.contact-form {
+  position: relative;
+  /* Ensures steps are positioned relative to this */
+}
+
+.form-step {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out, visibility 0.4s;
+  transform: translateX(100%); /* Start off-screen to the right */
+  padding-top: 5px; /* Adjust padding to make space for step elements */
+}
+
+.form-step.active {
+  position: static; /* Take up space when active */
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0%); /* Slide into view */
+  animation: fadeIn 0.4s ease-in-out forwards;
+}
+
+/* Animation for previous step transition */
+.form-step.active.animate-prev {
+  animation: fadeOutToRight 0.4s ease-in-out forwards;
+}
+.form-step.active.animate-next {
+  animation: fadeInFromRight 0.4s ease-in-out forwards;
+}
+
+@keyframes fadeInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOutToLeft { /* For previous step if navigating back */
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+}
+
+
+/* Fieldset and form group styling (largely retained from previous) */
+.contact-form fieldset {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 25px 20px;
+  margin-bottom: 30px; /* Adjust margin if needed due to step positioning */
+  background-color: #fcfcfc;
+}
+
+.contact-form fieldset legend {
+  font-size: 1.3em;
+  font-weight: 600;
+  color: #007bff;
+  padding: 0 10px;
+  margin-left: -10px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+  font-size: 1em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="date"],
+.form-group input[type="tel"],
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+  color: #333;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="date"]:focus,
+.form-group input[type="tel"]:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+  outline: none;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Error styling */
+.form-group .error {
+  border-color: #dc3545 !important;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.85em;
+  margin-top: 5px;
+  display: block;
+}
+
+/* Radio button group styling */
+.radio-group label {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 25px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.radio-group input[type="radio"] {
+  width: auto;
+  margin-right: 8px;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+/* Navigation Buttons */
+.form-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  gap: 15px; /* Space between buttons */
+}
+
+.form-navigation button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  flex-grow: 1; /* Allow buttons to grow */
+  max-width: 180px; /* Limit max width of buttons */
+}
+
+.form-navigation .prev-button {
+  background-color: #6c757d; /* Grey for previous */
+  color: white;
+}
+
+.form-navigation .prev-button:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.form-navigation .next-button,
+.form-navigation .submit-button {
+  background-color: #007bff; /* Blue for next/submit */
+  color: white;
+}
+
+.form-navigation .next-button:hover,
+.form-navigation .submit-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .contact-form-section {
+    padding: 40px 15px;
+  }
+
+  .contact-form-container {
+    padding: 30px 20px;
+  }
+
+  .contact-form-container h2 {
+    font-size: 2em;
+  }
+
+  .contact-form fieldset {
+    padding: 20px 15px;
+    margin-bottom: 25px;
+  }
+
+  .contact-form fieldset legend {
+    font-size: 1.2em;
+  }
+
+  .form-group label,
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 0.95em;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group input[type="date"],
+  .form-group input[type="tel"],
+  .form-group select,
+  .form-group textarea {
+    padding: 10px 12px;
+  }
+
+  .radio-group label {
+    margin-right: 15px;
+  }
+
+  .form-navigation {
+    flex-direction: column; /* Stack buttons on small screens */
+    align-items: center;
+    gap: 10px;
+  }
+
+  .form-navigation button {
+    width: 100%; /* Full width when stacked */
+    max-width: 250px; /* Still limit max width */
+    font-size: 1em;
+    padding: 10px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-form-container {
+    padding: 20px 15px;
+  }
+
+  .contact-form-container h2 {
+    font-size: 1.8em;
+  }
+
+  .contact-form fieldset {
+    padding: 15px 10px;
+  }
+
+  .contact-form fieldset legend {
+    font-size: 1.1em;
+  }
+
+  .form-group label,
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 0.9em;
+  }
+
+  .radio-group label {
+    margin-right: 10px;
+  }
+}

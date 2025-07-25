@@ -7,9 +7,9 @@ function ContactForm() {
     clientFirstName: '',
     clientLastName: '',
     email: '',
-    dobMonth: '', // New state for month
-    dobDay: '',   // New state for day
-    dobYear: '',  // New state for year
+    dobMonth: '',
+    dobDay: '',
+    dobYear: '',
     phone: '',
     location: '',
     preferredTime: '',
@@ -35,7 +35,6 @@ function ContactForm() {
       document.getElementById('dobYear').focus();
     }
 
-
     setFormData(prevData => ({
       ...prevData,
       [name]: value
@@ -49,7 +48,6 @@ function ContactForm() {
     }
   };
 
-  const totalSteps = 3;
 
   const validateStep = (step) => {
     let newErrors = {};
@@ -57,7 +55,7 @@ function ContactForm() {
 
     switch (step) {
       case 1: // Potential Client Information fields + DOB
-        fieldsToValidate = ['clientFirstName', 'clientLastName', 'email', 'phone', 'dobMonth', 'dobDay', 'dobYear']; // Added DOB fields
+        fieldsToValidate = ['clientFirstName', 'clientLastName', 'email', 'phone', 'dobMonth', 'dobDay', 'dobYear'];
         break;
       case 2: // Preferences fields
         fieldsToValidate = ['location', 'preferredTime', 'therapyBefore'];
@@ -80,8 +78,8 @@ function ContactForm() {
       newErrors.email = 'Email address is invalid';
     }
 
-    // NEW: Date of Birth validation for M/D/Y fields
-    if (step === 1 && !newErrors.dobMonth && !newErrors.dobDay && !newErrors.dobYear) { // Only validate if all parts are filled (and not already flagged as required missing)
+    // Date of Birth validation for M/D/Y fields
+    if (step === 1 && !newErrors.dobMonth && !newErrors.dobDay && !newErrors.dobYear) {
       const { dobMonth, dobDay, dobYear } = formData;
 
       const month = parseInt(dobMonth, 10);
@@ -98,28 +96,23 @@ function ContactForm() {
         newErrors.dobDay = 'Invalid Day';
         dobValid = false;
       }
-      // Basic year validation: 4 digits, reasonable range (e.g., 1900-current year)
       if (isNaN(year) || dobYear.length !== 4 || year < 1900 || year > new Date().getFullYear()) {
         newErrors.dobYear = 'Invalid Year';
         dobValid = false;
       }
 
-      // If parts are numerically valid, check if it's a real date
       if (dobValid) {
         const date = new Date(year, month - 1, day);
-        // Check if the date object's values match the input values (handles invalid dates like Feb 30)
         if (date.getFullYear() !== year || date.getMonth() + 1 !== month || date.getDate() !== day) {
-          if (!newErrors.dobDay) newErrors.dobDay = 'Invalid Date'; // More specific error
+          if (!newErrors.dobDay) newErrors.dobDay = 'Invalid Date';
           dobValid = false;
         }
       }
 
       if (!dobValid && !newErrors.dobDay && !newErrors.dobMonth && !newErrors.dobYear) {
-         // Fallback if specific part errors weren't caught but date is still invalid
          newErrors.dobYear = 'Invalid Date';
       }
     }
-
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -138,18 +131,18 @@ function ContactForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateStep(currentStep)) {
-      // Combine DOB parts into a single string for submission if needed
       const finalFormData = {
         ...formData,
-        dob: `${formData.dobMonth}/${formData.dobDay}/${formData.dobYear}` // Example combined format
+        dob: `${formData.dobMonth}/${formData.dobDay}/${formData.dobYear}`
       };
       console.log('Form data submitted:', finalFormData);
       setIsSubmitted(true);
-      // Optionally reset form: setFormData(initialState);
     } else {
       console.log('Form has validation errors:', errors);
     }
   };
+
+  const totalSteps = 3;
 
   if (isSubmitted) {
     return (
@@ -165,11 +158,9 @@ function ContactForm() {
     );
   }
 
-  // Determine if dobDay and dobYear fields should be disabled
   const isMonthFilledAndValid = formData.dobMonth.length > 0 && !errors.dobMonth;
   const isDayFilledAndValid = formData.dobDay.length > 0 && !errors.dobDay;
   const isDobComplete = isMonthFilledAndValid && isDayFilledAndValid && formData.dobYear.length === 4 && !errors.dobYear;
-
 
   return (
     <section className="contact-form-section">
@@ -183,7 +174,6 @@ function ContactForm() {
         <div className="step-indicator">Step {currentStep} of {totalSteps}</div>
 
         <form onSubmit={handleSubmit} className="contact-form">
-          {/* Step 1: Potential Client Information (with new DOB fields) */}
           {currentStep === 1 && (
             <div className="form-step active">
               <fieldset>
@@ -228,7 +218,6 @@ function ContactForm() {
                   {errors.email && <span className="error-message">{errors.email}</span>}
                 </div>
 
-                {/* Date of Birth: Month, Day, Year fields */}
                 <div className="form-group">
                   <label>Date of Birth *</label>
                   <div className="dob-group">
@@ -240,6 +229,8 @@ function ContactForm() {
                       onChange={handleChange}
                       placeholder="MM"
                       maxLength="2"
+                      inputmode="numeric" // Added for numpad
+                      pattern="[0-9]*"     // Added for numpad
                       className={errors.dobMonth ? 'error' : ''}
                       aria-label="Month"
                       aria-required="true"
@@ -252,10 +243,12 @@ function ContactForm() {
                       onChange={handleChange}
                       placeholder="DD"
                       maxLength="2"
+                      inputmode="numeric" // Added for numpad
+                      pattern="[0-9]*"     // Added for numpad
                       className={errors.dobDay ? 'error' : ''}
                       aria-label="Day"
                       aria-required="true"
-                      disabled={!isMonthFilledAndValid} // Disabled until month is valid
+                      disabled={!isMonthFilledAndValid}
                     />
                     <input
                       type="text"
@@ -265,13 +258,14 @@ function ContactForm() {
                       onChange={handleChange}
                       placeholder="YYYY"
                       maxLength="4"
+                      inputmode="numeric" // Added for numpad
+                      pattern="[0-9]*"     // Added for numpad
                       className={errors.dobYear ? 'error' : ''}
                       aria-label="Year"
                       aria-required="true"
-                      disabled={!isDayFilledAndValid} // Disabled until day is valid
+                      disabled={!isDayFilledAndValid}
                     />
                   </div>
-                  {/* Display DOB errors from any of the fields */}
                   {(errors.dobMonth || errors.dobDay || errors.dobYear) &&
                     <span className="error-message">
                       {errors.dobMonth || errors.dobDay || errors.dobYear}
@@ -296,7 +290,6 @@ function ContactForm() {
             </div>
           )}
 
-          {/* Step 2: Preferences (was Step 3) */}
           {currentStep === 2 && (
             <div className="form-step active">
               <fieldset>
@@ -381,7 +374,6 @@ function ContactForm() {
             </div>
           )}
 
-          {/* New Step 3: Other Details (was Step 4) */}
           {currentStep === 3 && (
             <div className="form-step active">
               <fieldset>
@@ -468,7 +460,7 @@ function ContactForm() {
                 type="button"
                 className="next-button"
                 onClick={nextStep}
-                disabled={currentStep === 1 && !isDobComplete} // Disable 'Next' on Step 1 if DOB is incomplete/invalid
+                disabled={currentStep === 1 && !isDobComplete}
               >
                 Next
               </button>

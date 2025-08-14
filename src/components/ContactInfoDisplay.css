@@ -1,40 +1,40 @@
 .contact-info-section {
   padding: 80px 40px;
-  background-color: #e0f2f7; /* Soft background, similar to hero */
+  background-color: transparent;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 85vh; /* Take up more vertical space */
+  min-height: 85vh;
 }
 
 .contact-info-container {
   max-width: 800px;
   width: 100%;
-  background-color: #ffffff;
+  background-color: #2d3748; /* Dark background for container */
   padding: 50px 40px;
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
 }
 
 .contact-info-container h1 {
   font-size: 3.5em;
-  color: #2c3e50;
+  color: #edf2f7;
   margin-bottom: 20px;
   font-weight: 700;
 }
 
 .contact-info-container .tagline {
   font-size: 1.6em;
-  color: #007bff;
+  color: #818cf8; /* Pastel accent */
   margin-bottom: 25px;
   font-weight: 600;
 }
 
 .contact-info-container .description {
   font-size: 1.1em;
-  color: #555;
+  color: #a0aec0;
   line-height: 1.6;
   margin-bottom: 40px;
   max-width: 600px;
@@ -44,53 +44,46 @@
 
 .office-hours h3 {
   font-size: 1.4em;
-  color: #2c3e50;
+  color: #e2e8f0;
   margin-bottom: 10px;
 }
 
 .office-hours p {
   font-size: 1.1em;
-  color: #555;
+  color: #a0aec0;
   margin-bottom: 30px;
 }
 
-/* Styling for contact items with icons */
 .contact-details {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center items horizontally */
-  margin-bottom: 40px; /* Space before button */
+  align-items: center;
+  margin-bottom: 40px;
 }
 
 .contact-details .contact-item {
-  font-size: 1.5em; /* Larger for phone/email */
-  color: #333;
+  font-size: 1.5em;
+  color: #e2e8f0;
   margin-bottom: 15px;
   font-weight: 600;
-  display: flex; /* Use flexbox for icon and text alignment */
-  align-items: center; /* Vertically align icon and text */
-  gap: 10px; /* Space between icon and text */
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .contact-details .icon {
-  font-size: 1em; /* Icon size relative to text */
-  color: #007bff; /* Color for icons */
-  /* You can adjust specific icon colors here if needed */
+  font-size: 1em;
+  color: #818cf8; /* Pastel accent for icons */
 }
 
 .contact-details .email-address {
-  color: #007bff; /* Highlight email */
+  color: #818cf8;
   text-decoration: underline;
 }
 
-.contact-details .phone-number {
-  white-space: nowrap; /* Prevent phone numbers from breaking */
-}
-
-
 .start-form-button {
-  background-color: #28a745; /* Green button */
-  color: white;
+  background-color: #6ee7b7; /* Pastel Mint */
+  color: #1a202c; /* Dark text */
   padding: 18px 35px;
   border: none;
   border-radius: 8px;
@@ -99,87 +92,13 @@
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
   margin-top: 40px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .start-form-button:hover {
-  background-color: #218838;
+  background-color: #86efac;
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(110, 231, 183, 0.2);
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .contact-info-section {
-    padding: 60px 20px;
-    min-height: unset; /* Allow height to adjust */
-  }
-
-  .contact-info-container {
-    padding: 30px 20px;
-  }
-
-  .contact-info-container h1 {
-    font-size: 2.5em;
-  }
-
-  .contact-info-container .tagline {
-    font-size: 1.2em;
-  }
-
-  .contact-info-container .description {
-    font-size: 1em;
-    margin-bottom: 30px;
-  }
-
-  .office-hours h3 {
-    font-size: 1.2em;
-  }
-
-  .office-hours p {
-    font-size: 1em;
-  }
-
-  .contact-details .contact-item {
-    font-size: 1.2em; /* Smaller on mobile */
-    margin-bottom: 10px;
-    gap: 8px; /* Slightly less gap */
-  }
-
-  .contact-details .icon {
-    font-size: 0.9em; /* Adjust icon size too */
-  }
-
-  .start-form-button {
-    padding: 15px 30px;
-    font-size: 1.1em;
-    margin-top: 30px;
-  }
-}
-
-@media (max-width: 480px) {
-  .contact-info-section {
-    padding: 40px 15px;
-  }
-
-  .contact-info-container h1 {
-    font-size: 2em;
-  }
-
-  .contact-info-container .tagline {
-    font-size: 1.1em;
-  }
-
-  .contact-details .contact-item {
-    font-size: 1.1em;
-  }
-
-  .contact-details .icon {
-    font-size: 0.85em;
-  }
-
-  .start-form-button {
-    padding: 12px 25px;
-    font-size: 1em;
-  }
-}
+/* Other media queries can be kept as they are */

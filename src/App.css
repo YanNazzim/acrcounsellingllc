@@ -8,27 +8,25 @@ main {
   flex-grow: 1; /* Allows main content to take up available space */
 }
 
-/* Remove default CRA styles if not needed */
+/* Hide default CRA styles */
 .App-logo,
 .App-header,
 .App-link {
-  display: none; /* Hiding these as they are not used in your current setup */
+  display: none;
 }
 
-/* Basic styling for placeholder sections to make them look consistent */
+/* Basic styling for placeholder sections */
 section {
   padding: 60px 40px;
   margin-bottom: 20px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  background-color: transparent; /* Sections are transparent against the body background */
   text-align: center;
 }
 
 section h2 {
   font-size: 2.2em;
   margin-bottom: 25px;
-  color: #2c3e50;
+  color: #edf2f7;
 }
 
 section p {
@@ -36,7 +34,7 @@ section p {
   margin-left: auto;
   margin-right: auto;
   font-size: 1.1em;
-  color: #555;
+  color: #a0aec0;
 }
 
 @media (max-width: 768px) {

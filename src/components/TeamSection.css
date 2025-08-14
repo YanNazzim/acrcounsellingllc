@@ -1,53 +1,54 @@
 .team-section {
   padding: 80px 40px;
-  background-color: #f9f9f9; /* Consistent light background */
+  background-color: transparent;
   text-align: center;
 }
 
 .team-section h2 {
   font-size: 2.8em;
   margin-bottom: 50px;
-  color: #2c3e50;
+  color: #edf2f7;
   font-weight: 700;
 }
 
 .team-section .team-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 35px; /* Increased gap */
+  gap: 35px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .team-member-card {
-  background-color: #ffffff;
-  padding: 35px; /* More padding */
-  border-radius: 12px; /* Slightly more rounded */
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+  background-color: #2d3748; /* Dark card background */
+  padding: 35px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Align items to the top for consistent card height */
+  justify-content: flex-start;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #4a5568;
 }
 
 .team-member-card:hover {
-  transform: translateY(-10px); /* Lift card on hover */
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  transform: translateY(-10px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
 }
 
 .member-image-container {
-  width: 130px; /* Slightly larger image */
+  width: 130px;
   height: 130px;
   border-radius: 50%;
   overflow: hidden;
   margin-bottom: 25px;
-  border: 4px solid #007bff; /* Thicker, vibrant border */
+  border: 4px solid #818cf8; /* Pastel accent border */
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-shrink: 0; /* Prevent image from shrinking */
+  flex-shrink: 0;
 }
 
 .member-image {
@@ -57,34 +58,33 @@
   display: block;
 }
 
-
 .team-member-card h3 {
-  font-size: 2em; /* Larger name */
-  color: #2c3e50;
+  font-size: 2em;
+  color: #e2e8f0;
   margin-bottom: 8px;
   font-weight: 700;
 }
 
 .team-member-card .role {
-  font-weight: 600; /* Semi-bold role */
-  color: #007bff;
+  font-weight: 600;
+  color: #818cf8; /* Pastel accent for role */
   margin-bottom: 20px;
   font-size: 1.1em;
 }
 
 .team-member-card p {
   font-size: 1em;
-  color: #666;
+  color: #a0aec0;
   line-height: 1.6;
   flex-grow: 1;
-  text-align: center; /* Center text within card */
-  margin-bottom: 25px; /* Space before button */
+  text-align: center;
+  margin-bottom: 25px;
 }
 
 .team-member-card button {
-  background-color: #28a745; /* Green button */
-  color: white;
-  padding: 12px 25px; /* Larger button */
+  background-color: #6ee7b7; /* Pastel Mint button */
+  color: #1a202c; /* Dark text on button */
+  padding: 12px 25px;
   border: none;
   border-radius: 6px;
   font-size: 1em;
@@ -94,12 +94,11 @@
 }
 
 .team-member-card button:hover {
-  background-color: #218838;
+  background-color: #86efac;
   transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(110, 231, 183, 0.2);
 }
 
-/* Responsive adjustments for Team Section */
 @media (max-width: 768px) {
   .team-section {
     padding: 50px 20px;
@@ -111,7 +110,7 @@
   }
 
   .team-section .team-grid {
-    grid-template-columns: 1fr; /* Single column on small screens */
+    grid-template-columns: 1fr;
   }
 
   .team-member-card {

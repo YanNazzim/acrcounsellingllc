@@ -3,9 +3,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px 40px;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e0e0e0;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+  background-color: #2d3748; /* Darker header background */
+  border-bottom: 1px solid #4a5568; /* Subtle border */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -14,13 +14,12 @@
 .header .logo h1 {
   margin: 0;
   font-size: 28px;
-  color: #2c3e50;
+  color: #e2e8f0;
   font-weight: 700;
 }
 
-/* Hamburger menu button */
 .hamburger-menu {
-  display: none; /* Hidden by default */
+  display: none;
   flex-direction: column;
   justify-content: space-around;
   width: 30px;
@@ -29,23 +28,22 @@
   border: none;
   cursor: pointer;
   padding: 0;
-  z-index: 1001; /* Ensure it's above the nav-menu when open */
+  z-index: 1001;
 }
 
 .hamburger-menu .bar {
   width: 100%;
   height: 3px;
-  background-color: #2c3e50;
+  background-color: #e2e8f0; /* Light bars for hamburger */
   border-radius: 10px;
   transition: all 0.3s ease-in-out;
 }
 
-/* Navigation menu */
 .header nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex; /* Always display as flex for larger screens */
+  display: flex;
 }
 
 .header nav ul li {
@@ -54,9 +52,9 @@
 
 .header nav ul li a {
   text-decoration: none;
-  color: #555;
+  color: #a0aec0; /* Muted light text for nav links */
   font-weight: 600;
-  transition: color 0.3s ease, transform 0.2s ease;
+  transition: color 0.3s ease;
   position: relative;
 }
 
@@ -67,63 +65,57 @@
   height: 2px;
   bottom: -5px;
   left: 0;
-  background-color: #007bff;
+  background-color: #818cf8; /* Pastel accent for underline */
   transition: width 0.3s ease-out;
 }
 
 .header nav ul li a:hover {
-  color: #007bff;
+  color: #e2e8f0; /* Brighter on hover */
 }
 
 .header nav ul li a:hover::after {
   width: 100%;
 }
 
-/* Responsive adjustments for Header */
 @media (max-width: 768px) {
   .header {
-    flex-direction: row; /* Keep logo and hamburger on one row */
     padding: 15px 20px;
   }
 
-  .header .logo {
-    margin-bottom: 0; /* Remove margin from previous mobile style */
-  }
-
   .hamburger-menu {
-    display: flex; /* Show hamburger menu on small screens */
+    display: flex;
   }
 
   .nav-menu {
-    display: none; /* Hide the regular nav menu by default on small screens */
+    display: none;
     flex-direction: column;
     position: fixed;
     top: 0;
-    right: -100%; /* Start off-screen */
-    width: 70%; /* Adjust as needed */
+    right: -100%;
+    width: 70%;
     max-width: 300px;
     height: 100%;
-    background-color: #ffffff;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-    padding-top: 80px; /* Space for fixed header/logo */
+    background-color: #2d3748; /* Dark background for mobile menu */
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+    padding-top: 80px;
     transition: right 0.3s ease-in-out;
   }
 
   .nav-menu.open {
-    display: flex; /* Show when 'open' class is applied */
-    right: 0; /* Slide in */
+    display: flex;
+    right: 0;
   }
 
   .nav-menu ul {
     flex-direction: column;
-    text-align: left; /* Align text within the mobile menu */
+    text-align: left;
     width: 100%;
   }
 
   .nav-menu ul li {
-    margin: 0; /* Remove left margin */
+    margin: 0;
     padding: 15px 20px;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #4a5568;
   }
 
   .nav-menu ul li:last-child {
@@ -132,15 +124,14 @@
 
   .nav-menu ul li a {
     width: 100%;
-    display: block; /* Make links take full width for easier tapping */
-    color: #2c3e50; /* Darker color for mobile links */
+    display: block;
+    color: #e2e8f0;
   }
 
   .nav-menu ul li a::after {
-    display: none; /* Hide underline effect on mobile menu */
+    display: none;
   }
 
-  /* Animations for hamburger icon when open */
   .hamburger-menu.open .bar:nth-child(1) {
     transform: translateY(11px) rotate(45deg);
   }

@@ -1,3 +1,6 @@
+/* Google Fonts Import - Place in your public/index.html <head> or here */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap');
+
 /* Global Resets and Base Styles */
 body {
   margin: 0;
@@ -7,13 +10,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
-  color: #333; /* Darker text for readability */
-  background-color: #f9f9f9; /* Light background */
+  color: #e2e8f0; /* Soft light text color for dark mode */
+  background-color: #1a202c; /* Deep, dark slate background */
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', sans-serif; /* A more modern heading font */
-  color: #2c3e50; /* Dark blue for headings */
+  font-family: 'Montserrat', sans-serif;
+  color: #edf2f7; /* Slightly brighter for headings */
   margin-top: 0;
   margin-bottom: 0.5em;
   line-height: 1.2;
@@ -22,24 +25,20 @@ h1, h2, h3, h4, h5, h6 {
 p {
   margin-top: 0;
   margin-bottom: 1em;
+  color: #a0aec0; /* Lighter gray for paragraph text */
 }
 
 a {
   text-decoration: none;
-  color: #007bff;
+  color: #818cf8; /* Pastel Indigo for links */
   transition: color 0.3s ease;
 }
 
 a:hover {
-  color: #0056b3;
+  color: #a7afff; /* Lighter on hover */
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-/* You might need to add Google Fonts imports in your index.html or here */
-/* For example, in public/index.html, add inside <head>:
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-*/

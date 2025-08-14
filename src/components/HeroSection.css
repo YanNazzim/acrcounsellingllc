@@ -1,12 +1,11 @@
 .hero-section {
-  background-color: #e0f2f7; /* Soft blue background */
-  padding: 100px 40px; /* More vertical padding */
+  background-color: transparent; /* Use body background */
+  padding: 100px 40px;
   text-align: center;
-  color: #333;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 60vh; /* Make it take up more vertical space */
+  min-height: 60vh;
 }
 
 .hero-section .hero-content {
@@ -15,43 +14,62 @@
 }
 
 .hero-section h2 {
-  font-size: 3.8em; /* Larger heading */
+  font-size: 3.8em;
   margin-bottom: 25px;
-  color: #2c3e50;
+  color: #edf2f7;
   font-weight: 700;
   line-height: 1.1;
 }
 
 .hero-section p {
-  font-size: 1.3em; /* Larger paragraph text */
+  font-size: 1.3em;
   line-height: 1.7;
   margin-bottom: 40px;
-  color: #555;
+  color: #a0aec0;
 }
 
-.hero-section button {
-  background-color: #007bff;
-  color: white;
-  padding: 18px 35px; /* Larger button */
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.hero-button {
+  padding: 18px 35px;
   border: none;
-  border-radius: 8px; /* Slightly more rounded corners */
+  border-radius: 8px;
   font-size: 1.2em;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  color: #1a202c; /* Dark text on light buttons */
 }
 
-.hero-section button:hover {
-  background-color: #0056b3;
-  transform: translateY(-3px); /* Subtle lift on hover */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+.appointment-button {
+  background-color: #818cf8; /* Pastel Indigo */
 }
 
-/* Responsive adjustments for Hero Section */
+.appointment-button:hover {
+  background-color: #a7afff; /* Lighter on hover */
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(129, 140, 248, 0.3);
+}
+
+.video-button {
+  background-color: #6ee7b7; /* Pastel Mint */
+}
+
+.video-button:hover {
+  background-color: #86efac; /* Lighter on hover */
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(110, 231, 183, 0.3);
+}
+
 @media (max-width: 768px) {
   .hero-section {
     padding: 60px 20px;
-    min-height: unset; /* Remove min-height on smaller screens */
+    min-height: unset;
   }
 
   .hero-section h2 {
@@ -62,7 +80,7 @@
     font-size: 1em;
   }
 
-  .hero-section button {
+  .hero-button {
     padding: 12px 25px;
     font-size: 1em;
   }

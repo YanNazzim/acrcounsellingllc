@@ -1,49 +1,50 @@
 .services-section {
-  padding: 80px 40px; /* More padding */
+  padding: 80px 40px;
   text-align: center;
-  background-color: #ffffff;
+  background-color: #2d3748; /* Slightly lighter dark background */
+  border-radius: 15px;
 }
 
 .services-section h2 {
   font-size: 2.8em;
   margin-bottom: 15px;
-  color: #2c3e50;
+  color: #edf2f7;
   font-weight: 700;
 }
 
 .services-section h3 {
   font-size: 1.4em;
-  color: #555;
+  color: #a0aec0;
   margin-bottom: 40px;
-  font-weight: 400; /* Regular weight for sub-heading */
+  font-weight: 400;
 }
 
 .services-section .services-list {
-  display: grid; /* Use grid for better layout control */
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Flexible columns */
-  gap: 25px; /* More space between items */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .services-section .services-list p {
-  background-color: #f0f8ff; /* Very light blue for service items */
+  background-color: #1a202c; /* Darker background for items */
   padding: 20px;
-  border-radius: 10px; /* More rounded corners */
+  border-radius: 10px;
   font-size: 1.1em;
-  color: #333;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* More defined shadow */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  font-weight: 600; /* Semi-bold for service names */
+  color: #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  font-weight: 600;
+  border: 1px solid #4a5568;
 }
 
 .services-section .services-list p:hover {
-  transform: translateY(-8px); /* More pronounced lift */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
-  background-color: #e6f7ff; /* Slightly darker background on hover */
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  background-color: #4a5568; /* Highlight on hover */
 }
 
-/* Responsive adjustments for Services Section */
 @media (max-width: 768px) {
   .services-section {
     padding: 50px 20px;
